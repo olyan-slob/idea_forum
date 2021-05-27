@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import createPost from "../../actions/createPost";
 import logIn from "../../actions/logIn";
@@ -16,7 +17,7 @@ const PostNew = ({ history }) => (
         }
 
         if (isLoading) {
-          return <div>loading...</div>;
+          return <CircularProgress disableShrink />;
         }
 
         if (!auth) {
@@ -26,7 +27,10 @@ const PostNew = ({ history }) => (
               <Button
                 variant="contained"
                 onClick={logIn}
-                style={{ backgroundColor: "#f1eaef", color: "524450" }}
+                style={{
+                  backgroundColor: "#f1eaef",
+                  color: "#3C436B",
+                }}
               >
                 log in
               </Button>

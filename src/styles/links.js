@@ -5,7 +5,11 @@ import { Link } from "react-router-dom";
 
 const InternalLink = ({ to, children }) => {
   return (
-    <MaterialLink component={Link} to={to} style={{ color: "#524450" }}>
+    <MaterialLink
+      component={Link}
+      to={to}
+      style={{ color: "#524450", marginTop: "10px" }}
+    >
       {children}
     </MaterialLink>
   );

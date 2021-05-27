@@ -1,4 +1,5 @@
 import { Button } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import { FirestoreCollection } from "react-firestore";
 import deletePost from "../../actions/deletePost";
@@ -19,7 +20,7 @@ const PostEdit = ({ match, history }) => (
         }
 
         if (isLoading) {
-          return <p>loading...</p>;
+          return <CircularProgress disableShrink />;
         }
 
         if (data.length === 0) {

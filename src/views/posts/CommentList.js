@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { FirestoreCollection, FirestoreDocument } from "react-firestore";
@@ -13,7 +14,7 @@ const CommentList = ({ postId }) => {
         }
 
         if (isLoading) {
-          return <p>loading...</p>;
+          return <CircularProgress disableShrink />;
         }
 
         if (data.length === 0) {
@@ -42,9 +43,8 @@ const CommentList = ({ postId }) => {
                       >
                         <FirestoreDocument path={`/users/${comment.createdBy}`}>
                           {(user) => {
-                            console.log(user);
                             if (user.isLoading) {
-                              return "Loading...";
+                              return <CircularProgress disableShrink />;
                             }
                             return user.data?.name || "anonymous";
                           }}

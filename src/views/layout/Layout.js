@@ -2,6 +2,7 @@
 // check out App.js to see how it's used
 
 import { Avatar, Button } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import { FirestoreDocument } from "react-firestore";
 import logIn from "../../actions/logIn";
@@ -18,7 +19,7 @@ const Layout = ({ children }) => (
         <FirebaseAuth>
           {({ isLoading, error, auth }) => {
             if (isLoading) {
-              return "...";
+              return <CircularProgress disableShrink />;
             }
             if (error) {
               return "⚠️ login error";
@@ -28,9 +29,8 @@ const Layout = ({ children }) => (
                 <HeaderLink to={`/account`}>
                   <FirestoreDocument path={`/users/${auth.uid}`}>
                     {(user) => {
-                      console.log(user);
                       if (user.isLoading) {
-                        return "Loading...";
+                        return <CircularProgress disableShrink />;
                       }
                       return <Avatar src={user.data?.avatar} />;
                     }}
@@ -42,7 +42,11 @@ const Layout = ({ children }) => (
                 <Button
                   variant="contained"
                   onClick={logIn}
-                  style={{ backgroundColor: "#f1eaef", color: "#3C436B" }}
+                  style={{
+                    backgroundColor: "#f1eaef",
+                    color: "#3C436B",
+                    marginTop: "10px",
+                  }}
                 >
                   log in
                 </Button>

@@ -1,3 +1,5 @@
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import { FirestoreCollection } from "react-firestore";
 import { Page } from "../../styles/layout";
@@ -19,7 +21,7 @@ const Post = ({ match }) => (
         }
 
         if (isLoading) {
-          return <p>loading...</p>;
+          return <CircularProgress disableShrink />;
         }
 
         if (data.length === 0) {
@@ -31,9 +33,11 @@ const Post = ({ match }) => (
 
         return (
           <div>
-            <h1>{post.title}</h1>
+            <Typography variant="h2" style={{ marginBottom: "30px" }}>
+              {post.title}
+            </Typography>
 
-            <p>{post.content}</p>
+            <Typography variant="body1">{post.content}</Typography>
 
             <FirebaseAuth>
               {({ auth }) =>
@@ -42,7 +46,7 @@ const Post = ({ match }) => (
                 ) : null
               }
             </FirebaseAuth>
-
+            <hr />
             <CommentForm postId={postId} />
             <CommentList postId={postId} />
           </div>

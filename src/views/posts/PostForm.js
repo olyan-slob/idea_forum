@@ -33,7 +33,10 @@ const PostForm = ({ onSubmit, post }) => {
         <Button
           variant="contained"
           onClick={() => onSubmit({ title, content })}
-          style={{ backgroundColor: "#50C772", color: "#f1eaef" }}
+          style={{
+            backgroundColor: "#50C772",
+            color: "#f1eaef",
+          }}
         >
           {post ? "Edit" : "Add"} Post
         </Button>

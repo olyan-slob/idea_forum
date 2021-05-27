@@ -1,4 +1,5 @@
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import logIn from "../../actions/logIn";
 import { Page } from "../../styles/layout";
@@ -11,7 +12,7 @@ const Account = () => (
     <FirebaseAuth>
       {({ isLoading, error, auth }) => {
         if (isLoading) {
-          return <p>loading...</p>;
+          return <CircularProgress disableShrink />;
         }
 
         if (error) {
