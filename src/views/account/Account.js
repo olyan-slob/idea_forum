@@ -1,3 +1,4 @@
+import Button from "@material-ui/core/Button";
 import React from "react";
 import logIn from "../../actions/logIn";
 import { Page } from "../../styles/layout";
@@ -21,7 +22,13 @@ const Account = () => (
           return (
             <div>
               <p>Log in to see your account</p>
-              <button onClick={logIn}>Log in</button>
+              <Button
+                variant="contained"
+                onClick={logIn}
+                style={{ backgroundColor: "#cbbdc3" }}
+              >
+                Log in
+              </Button>
             </div>
           );
         }

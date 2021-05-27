@@ -1,7 +1,9 @@
 // this Layout component wraps every page with the app header on top
 // check out App.js to see how it's used
 
+import { Avatar, Button } from "@material-ui/core";
 import React from "react";
+import { FirestoreDocument } from "react-firestore";
 import logIn from "../../actions/logIn";
 import { Footer, Header, HeaderFooterWrapper } from "../../styles/layout";
 import { HeaderLink } from "../../styles/links";
@@ -24,13 +26,27 @@ const Layout = ({ children }) => (
             if (auth) {
               return (
                 <HeaderLink to={`/account`}>
-                  <span role="img" aria-label="account">
-                    👤
-                  </span>
+                  <FirestoreDocument path={`/users/${auth.uid}`}>
+                    {(user) => {
+                      console.log(user);
+                      if (user.isLoading) {
+                        return "Loading...";
+                      }
+                      return <Avatar src={user.data?.avatar} />;
+                    }}
+                  </FirestoreDocument>
                 </HeaderLink>
               );
             } else {
-              return <button onClick={logIn}>log in</button>;
+              return (
+                <Button
+                  variant="contained"
+                  onClick={logIn}
+                  style={{ backgroundColor: "#f1eaef", color: "#3C436B" }}
+                >
+                  log in
+                </Button>
+              );
             }
           }}
         </FirebaseAuth>

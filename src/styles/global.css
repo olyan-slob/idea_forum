@@ -1,0 +1,26 @@
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  font-family: EB Garamond;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+  background: linear-gradient(48deg, #c0fefc, #e4bad4);
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: #eee;
+  margin: 1rem 0;
+}

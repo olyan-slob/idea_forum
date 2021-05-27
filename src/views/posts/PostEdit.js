@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import React from "react";
 import { FirestoreCollection } from "react-firestore";
 import deletePost from "../../actions/deletePost";
@@ -37,12 +38,13 @@ const PostEdit = ({ match, history }) => (
                 )
               }
             />
-            <br />
-            <button
+            <Button
+              variant="contained"
               onClick={() => deletePost(post).then(() => history.push(`/`))}
+              style={{ backgroundColor: "#CB0C0C", color: "#f1eaef" }}
             >
               Delete post
-            </button>
+            </Button>
           </div>
         );
       }}

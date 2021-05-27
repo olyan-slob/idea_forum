@@ -1,24 +1,32 @@
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import MaterialLink from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import React from "react";
+import { Link } from "react-router-dom";
 
-import colors from './colors'
+const InternalLink = ({ to, children }) => {
+  return (
+    <MaterialLink component={Link} to={to} style={{ color: "#524450" }}>
+      {children}
+    </MaterialLink>
+  );
+};
 
-const InternalLink = styled(Link)`
-  color: ${colors.blue};
-  text-decoration: none;
+const HeaderLink = ({ to, children }) => {
+  return (
+    <Typography variant="h3">
+      <MaterialLink
+        component={Link}
+        to={to}
+        color="inherit"
+        style={{
+          color: "#181219",
+          fontFamily: "Crimson Text",
+        }}
+      >
+        {children}
+      </MaterialLink>
+    </Typography>
+  );
+};
 
-  &:hover,
-  &:active {
-    text-decoration: underline;
-  }
-`
-const HeaderLink = styled(Link)`
-  color: ${colors.black};
-  text-decoration: none;
-  font-size: 1.2rem;
-`
-
-export {
-  InternalLink,
-  HeaderLink,
-}
+export { InternalLink, HeaderLink };

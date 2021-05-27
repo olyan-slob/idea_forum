@@ -1,44 +1,45 @@
-import React from "react";
-import { FormLabel, FormRow, TextArea, TextInput } from "../../styles/forms";
+import { Button } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import TextField from "@material-ui/core/TextField";
+import React, { useState } from "react";
+import { FormRow } from "../../styles/forms";
 
-class PostForm extends React.Component {
-  onSubmit = (event) => {
-    event.preventDefault();
-    const { title, content } = event.target.elements;
-    const values = {
-      title: title.value,
-      content: content.value,
-    };
-    this.props.onSubmit(values);
-  };
+const PostForm = ({ onSubmit, post }) => {
+  const [title, setTitle] = useState(post?.title || "");
+  const [content, setContent] = useState(post?.content || "");
 
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <FormRow>
-          <FormLabel for="title">Title</FormLabel>
-          <TextInput
-            type="text"
-            name="title"
-            defaultValue={this.props.post ? this.props.post.title : ""}
-            required
-          />
-        </FormRow>
+  return (
+    <>
+      <FormRow>
+        <TextField
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          label="Title"
+          variant="outlined"
+        />
+      </FormRow>
 
-        <FormRow>
-          <FormLabel for="content">Content</FormLabel>
-          <TextArea
-            type="text"
-            name="content"
-            defaultValue={this.props.post ? this.props.post.content : ""}
-            required
-          />
-        </FormRow>
-
-        <button type="submit">Save post</button>
-      </form>
-    );
-  }
-}
+      <FormRow>
+        <TextField
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          label="Content"
+          multiline
+          rows={4}
+          variant="outlined"
+        />
+      </FormRow>
+      <Box mb={2}>
+        <Button
+          variant="contained"
+          onClick={() => onSubmit({ title, content })}
+          style={{ backgroundColor: "#50C772", color: "#f1eaef" }}
+        >
+          {post ? "Edit" : "Add"} Post
+        </Button>
+      </Box>
+    </>
+  );
+};
 
 export default PostForm;

@@ -1,27 +1,39 @@
-import styled from 'styled-components'
+import { Box } from "@material-ui/core";
+import React from "react";
 
-const HeaderFooterWrapper = styled.div`
-  max-width: 500px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-rows: max-content auto max-content;
-  min-height: 100vh;
-`
-const Header = styled.div`
-  padding: 2rem 1rem 1rem;
-`
-const Page = styled.div`
-  padding: 1rem;
-`
-const Footer = styled.div`
-  padding: 1rem;
-  text-align: center;
-  opacity: .3;
-`
+const HeaderFooterWrapper = ({ children }) => {
+  return (
+    <Box
+      maxWidth="500px"
+      my={0}
+      mx="auto"
+      display="grid"
+      gridTemplateRows="max-content auto max-content"
+      minHeight="100vh"
+    >
+      {children}
+    </Box>
+  );
+};
 
-export {
-  HeaderFooterWrapper,
-  Header,
-  Page,
-  Footer,
-}
+const Header = ({ children }) => {
+  return (
+    <Box my="3rem" px="1rem" display="flex" justifyContent="space-between">
+      {children}
+    </Box>
+  );
+};
+
+const Page = ({ children }) => {
+  return <Box p="1rem">{children}</Box>;
+};
+
+const Footer = ({ children }) => {
+  return (
+    <Box p="1rem" textAlign="center" color="text.disabled">
+      {children}
+    </Box>
+  );
+};
+
+export { HeaderFooterWrapper, Header, Page, Footer };

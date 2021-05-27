@@ -2,7 +2,7 @@ import Firebase from "firebase/app";
 import React from "react";
 import { FirestoreProvider } from "react-firestore";
 import { BrowserRouter, Route } from "react-router-dom";
-import "../styles/global";
+import "../styles/global.css";
 import Layout from "./layout/Layout";
 import ErrorBoundary from "./misc/ErrorBoundary";
 import Routes from "./Routes";
