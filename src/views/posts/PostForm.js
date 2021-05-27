@@ -8,6 +8,8 @@ const PostForm = ({ onSubmit, post }) => {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.content || "");
 
+  const isValid = title.length > 3 && content.length > 10;
+
   return (
     <>
       <FormRow>
@@ -27,16 +29,16 @@ const PostForm = ({ onSubmit, post }) => {
           multiline
           rows={4}
           variant="outlined"
+          helperText={isValid ? "" : "Not enough symbols"}
         />
       </FormRow>
       <Box mb={2}>
         <Button
+          disabled={!isValid}
+          color="primary"
           variant="contained"
           onClick={() => onSubmit({ title, content })}
-          style={{
-            backgroundColor: "#50C772",
-            color: "#f1eaef",
-          }}
+          style={{ color: "#f1eaef" }}
         >
           {post ? "Edit" : "Add"} Post
         </Button>
