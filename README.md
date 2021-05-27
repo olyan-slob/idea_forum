@@ -1,18 +1,8 @@
-A modern web-app boilerplate with Create React App and Firebase. Focused on simplicity for new devs, rapid prototyping, and smallish projects.
+Simple discussion website where users can share their ideas and leave comments, using Firebase, React, MaterialUI, react-router.
 
-### **Full documentation at [getfirefly.org](http://getfirefly.org)**
+### **Getting started**
 
-### **[Live Demo](https://demo.getfirefly.org)**
+- npm start for local development
+- npm live to deploy
 
-## Folders
-
-Child folders each have their own readmes
-
-- [`/functions`](https://github.com/sampl/firefly/tree/master/functions) - contains all the backend code (not much)
-- [`/public`](https://github.com/sampl/firefly/tree/master/public) - files that will be available as-is on the web server
-- [`/scripts`](https://github.com/sampl/firefly/tree/master/scripts) - convenience scripts for developers
-- [`/src`](https://github.com/sampl/firefly/tree/master/src) - the front-end app
-
-## License
-
-[MIT License](https://en.wikipedia.org/wiki/MIT_License)
+### **[Live Demo](https://test-task-live.web.app)**
