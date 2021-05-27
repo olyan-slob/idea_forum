@@ -1,50 +1,48 @@
-import { Button } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import React, { useState } from "react";
-import { FormRow } from "../../styles/forms";
+import { Button } from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
+import React, { useState } from 'react'
+import { FormRow } from '../../styles/forms'
 
 const PostForm = ({ onSubmit, post }) => {
-  const [title, setTitle] = useState(post?.title || "");
-  const [content, setContent] = useState(post?.content || "");
+    const [title, setTitle] = useState(post?.title || '')
+    const [content, setContent] = useState(post?.content || '')
 
-  const isValid = title.length > 3 && content.length > 10;
+    const isValid = title.length > 3 && content.length > 10
 
-  return (
-    <>
-      <FormRow>
-        <TextField
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          label="Title"
-          variant="outlined"
-        />
-      </FormRow>
+    return (
+        <>
+            <FormRow>
+                <TextField
+                    fullWidth
+                    label="Title"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                />
+            </FormRow>
 
-      <FormRow>
-        <TextField
-          value={content}
-          onChange={(event) => setContent(event.target.value)}
-          label="Content"
-          multiline
-          rows={4}
-          variant="outlined"
-          helperText={isValid ? "" : "Not enough symbols"}
-        />
-      </FormRow>
-      <Box mb={2}>
-        <Button
-          disabled={!isValid}
-          color="primary"
-          variant="contained"
-          onClick={() => onSubmit({ title, content })}
-          style={{ color: "#f1eaef" }}
-        >
-          {post ? "Edit" : "Add"} Post
-        </Button>
-      </Box>
-    </>
-  );
-};
+            <FormRow>
+                <TextField
+                    multiline
+                    fullWidth
+                    label="Content"
+                    variant="outlined"
+                    rows={6}
+                    value={content}
+                    helperText={isValid ? '' : 'Type at least 10 symbols'}
+                    onChange={(event) => setContent(event.target.value)}
+                />
+            </FormRow>
 
-export default PostForm;
+            <Button
+                disabled={!isValid}
+                color="primary"
+                variant="contained"
+                onClick={() => onSubmit({ title, content })}
+            >
+                {post ? 'Save' : 'Add'} Post
+            </Button>
+        </>
+    )
+}
+
+export default PostForm

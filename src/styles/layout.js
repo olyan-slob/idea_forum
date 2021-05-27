@@ -4,7 +4,7 @@ import React from "react";
 const HeaderFooterWrapper = ({ children }) => {
   return (
     <Box
-      maxWidth="500px"
+      maxWidth="720px"
       my={0}
       mx="auto"
       display="grid"

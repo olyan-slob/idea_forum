@@ -1,3 +1,4 @@
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Firebase from "firebase/app";
 import React from "react";
 import { FirestoreProvider } from "react-firestore";
@@ -9,6 +10,7 @@ import Routes from "./Routes";
 
 const App = () => (
   <FirestoreProvider firebase={Firebase}>
+  <CssBaseline />
     <BrowserRouter>
       <ErrorBoundary>
         <Layout>

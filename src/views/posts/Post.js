@@ -1,59 +1,71 @@
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
-import React from "react";
-import { FirestoreCollection } from "react-firestore";
-import { Page } from "../../styles/layout";
-import { InternalLink } from "../../styles/links";
-import Error from "../misc/Error";
-import FirebaseAuth from "../misc/FirebaseAuth";
-import CommentForm from "./CommentForm";
-import CommentList from "./CommentList";
+import Box from '@material-ui/core/Box'
+import Fade from '@material-ui/core/Fade'
+import Typography from '@material-ui/core/Typography'
+import React from 'react'
+import { FirestoreCollection } from 'react-firestore'
+import { Page } from '../../styles/layout'
+import { InternalLink } from '../../styles/links'
+import Error from '../misc/Error'
+import FirebaseAuth from '../misc/FirebaseAuth'
+import CommentForm from './CommentForm'
+import CommentList from './CommentList'
 
 const Post = ({ match }) => (
-  <Page>
-    <FirestoreCollection
-      path={"posts"}
-      filter={["slug", "==", match.params.slug]}
-    >
-      {({ error, isLoading, data }) => {
-        if (error) {
-          return <Error error={error} />;
-        }
+    <Page>
+        <FirestoreCollection
+            path={'posts'}
+            filter={['slug', '==', match.params.slug]}
+        >
+            {({ error, isLoading, data }) => {
+                if (error) {
+                    return <Error error={error} />
+                }
 
-        if (isLoading) {
-          return <CircularProgress disableShrink />;
-        }
+                const post = data[0]
+                const postId = post?.id
 
-        if (data.length === 0) {
-          return <Error />;
-        }
+                return (
+                    <Fade in={!isLoading}>
+                        <Box>
+                            {data.length && (
+                                <>
+                                    <Typography
+                                        variant="h2"
+                                        style={{ marginBottom: '30px' }}
+                                    >
+                                        {post.title}
+                                    </Typography>
 
-        const post = data[0];
-        const postId = post.id;
+                                    <Typography variant="body1">
+                                        {post.content}
+                                    </Typography>
 
-        return (
-          <div>
-            <Typography variant="h2" style={{ marginBottom: "30px" }}>
-              {post.title}
-            </Typography>
+                                    <FirebaseAuth>
+                                        {({ auth }) =>
+                                            auth?.uid === post.createdBy ? (
+                                                <InternalLink
+                                                    to={`/${post.slug}/edit`}
+                                                    style={{
+                                                        marginTop: '20px',
+                                                    }}
+                                                >
+                                                    Edit
+                                                </InternalLink>
+                                            ) : null
+                                        }
+                                    </FirebaseAuth>
 
-            <Typography variant="body1">{post.content}</Typography>
+                                    <hr />
+                                    <CommentForm postId={postId} />
+                                    <CommentList postId={postId} />
+                                </>
+                            )}
+                        </Box>
+                    </Fade>
+                )
+            }}
+        </FirestoreCollection>
+    </Page>
+)
 
-            <FirebaseAuth>
-              {({ auth }) =>
-                auth?.uid === post.createdBy ? (
-                  <InternalLink to={`/${post.slug}/edit`}>Edit</InternalLink>
-                ) : null
-              }
-            </FirebaseAuth>
-            <hr />
-            <CommentForm postId={postId} />
-            <CommentList postId={postId} />
-          </div>
-        );
-      }}
-    </FirestoreCollection>
-  </Page>
-);
-
-export default Post;
+export default Post
